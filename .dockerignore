@@ -1,0 +1,16 @@
+.git
+.github
+.angular
+.vscode
+.idea
+.storybook
+dist
+tmp
+out-tsc
+coverage
+node_modules
+storybook-static
+*.md
+.dockerignore
+.DS_Store
+src/stories

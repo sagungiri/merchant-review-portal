@@ -1,0 +1,18 @@
+services:
+  mock-api:
+    build:
+      context: .
+      target: mock-api
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  merchant-review-portal:
+    build:
+      context: .
+      target: portal
+    ports:
+      - "8080:80"
+    depends_on:
+      - mock-api
+    restart: unless-stopped

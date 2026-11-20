@@ -1,59 +1,79 @@
-# MerchantReviewPortal
+# Merchant Review Portal
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.30.
+Angular 21 take-home: merchant applications, roles (SALES / REVIEWER / ADMIN), and an in-memory mock API.
 
-## Development server
+Project definition: [ASSIGNMENT.md](./ASSIGNMENT.md)  
+Mock API internals: [mock-api/README.md](./mock-api/README.md)
 
-To start a local development server, run:
+## Prerequisites
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js 20+ (this repo was generated on Node 20)
+- npm
+- For Docker: Docker Desktop (or Engine + Compose)
 
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The Angular App uses mock API at **`http://localhost:3000`** (CORS is enabled).
+
+## Run everything locally
+
+One command starts the mock API and the Angular dev server:
 
 ```bash
-ng generate --help
+npm run start:all
 ```
 
-## Building
+| Process | URL |
+| --- | --- |
+| Angular (live reload) | http://localhost:4200 |
+| Mock API | http://localhost:3000 |
 
-To build the project run:
+Open **http://localhost:4200** in the browser.
+
+
+
+### Start them separately
 
 ```bash
-ng build
+npm run mock-api   # API only  → http://localhost:3000
+npm start          # Angular only → http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Run everything with Docker
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Builds both images and starts both containers:
 
 ```bash
-ng test
+docker compose up --build
 ```
 
-## Running end-to-end tests
+| Service | URL |
+| --- | --- |
+| Angular (production build, Nginx) | http://localhost:8080 |
+| Mock API | http://localhost:3000 |
 
-For end-to-end (e2e) testing, run:
+Open **http://localhost:8080**. The browser still calls the API at `http://localhost:3000`.
+
+Stop:
 
 ```bash
-ng e2e
+docker compose down
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Demo accounts
 
-## Additional Resources
+| Email | Password | Role |
+| --- | --- | --- |
+| `sales@demo.local` | `Sales@2468` | SALES (Ram) |
+| `reviewer@demo.local` | `Reviewer@2468` | REVIEWER (Hari) |
+| `admin@demo.local` | `Admin@2468` | ADMIN (Krishna) |
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Other commands
+
+```bash
+npm test              # Vitest + TestBed
+npm run build         # production output in dist/
+npm run storybook     # http://localhost:6006
+```
