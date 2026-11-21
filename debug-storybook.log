@@ -1,0 +1,86 @@
+[13:14:42.590] [INFO] This command is running via an AI agent: cursor. Proceeding with agentic installation flow.
+[13:14:43.077] [INFO] Initializing Storybook
+[13:14:43.080] [DEBUG] Getting package.json info for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:43.080] [INFO] Package manager: npm
+[13:14:43.081] [DEBUG] Getting CLI versions from NPM for storybook...
+[13:14:43.081] [DEBUG] Executing command: npm info storybook version
+[13:14:44.013] [INFO] Adding Storybook version 10.6.7 to your project
+[13:14:44.013] [DEBUG] Executing command: npm config get min-release-age --workspaces=false --include-workspace-root
+[13:14:44.254] [INFO] Installing Storybook for user specified project type: angular
+[13:14:44.254] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:44.255] [INFO] Framework detected: angular-vite
+[13:14:44.255] [DEBUG] Getting installed version for vitest...
+[13:14:44.256] [DEBUG] Executing command: npm ls --json --depth=99
+[13:14:44.799] [DEBUG] Installed version for vitest: 4.1.12
+[13:14:44.799] [DEBUG] Getting installed version for msw...
+[13:14:44.799] [DEBUG] Executing command: npm ls --json --depth=99
+[13:14:45.333] [DEBUG] No installations found for msw
+[13:14:45.335] [WARN] Skipping feature validation as these features were explicitly selected:
+docs
+[13:14:45.336] [INFO] Adding Storybook support to your "merchant-review-portal" project
+[13:14:45.338] [DEBUG] Getting dependency version for @angular/core...
+[13:14:45.338] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:45.338] [DEBUG] Getting package.json info for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:45.338] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:45.338] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:45.343] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:45.343] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:45.343] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:45.343] [DEBUG] Using cached version for storybook...
+[13:14:45.343] [DEBUG] Getting CLI versions from NPM for @storybook/angular-vite...
+[13:14:45.343] [DEBUG] Executing command: npm info @storybook/angular-vite version
+[13:14:45.346] [DEBUG] Getting CLI versions from NPM for @storybook/addon-docs...
+[13:14:45.346] [DEBUG] Executing command: npm info @storybook/addon-docs version
+[13:14:47.109] [INFO] - Configuring main.ts
+[13:14:47.110] [INFO] - Configuring preview.ts
+[13:14:47.110] [INFO] - Copying framework templates
+[13:14:47.123] [DEBUG] Executing command: npm config get registry --workspaces=false --include-workspace-root
+[13:14:48.337] [INFO] Storybook configuration generated
+[13:14:48.337] [INFO] Adding devDependencies:
+- storybook@^10.6.7
+- @storybook/angular-vite@^10.6.7
+- @storybook/addon-docs@^10.6.7
+- @types/node@^20
+- @angular-devkit/build-angular@^21.2.0
+- @angular-devkit/architect@^0.2102.0
+- @angular-devkit/core@^21.2.0
+- @angular/animations@^21.2.0
+- @analogjs/vite-plugin-angular@^2.7.3
+- vite
+[13:14:48.338] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:48.338] [DEBUG] Using cached package.json for /Users/sagun-giri-fonenxt/Documents/Projects/self/merchant-review-portal/package.json...
+[13:14:48.338] [INFO] Dependencies added to package.json
+[13:14:48.339] [INFO] Installing dependencies...
+[13:14:48.339] [INFO] Installing dependencies...
+[13:14:48.339] [DEBUG] Executing command: npm install
+[13:16:16.884] [INFO] Installing dependencies...: 
+added 500 packages, and audited 973 packages in 1m
+
+[13:16:16.884] [INFO] Installing dependencies...: added 500 packages, and a
+[13:16:16.885] [INFO] Installing dependencies...: 
+230 packages are looking for funding
+  run `npm fund` for details
+
+[13:16:16.885] [INFO] Installing dependencies...: 230 packages are looking 
+[13:16:16.906] [INFO] Installing dependencies...: 
+21 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+[13:16:16.906] [INFO] Installing dependencies...: 21 moderate severity vuln
+[13:16:16.918] [INFO] Dependencies installed
+[13:16:16.918] [INFO] Dependencies installed
+[13:16:16.919] [INFO] Configuring @storybook/addon-docs...
+[13:16:16.960] [WARN] Could not resolve the postinstall hook of @storybook/addon-docs, skipping its configuration. Run `npx storybook add @storybook/addon-docs` to set it up manually.
+[13:16:16.960] [INFO] @storybook/addon-docs configured
+
+[13:16:16.960] [INFO] Addons configured successfully
+[13:16:16.960] [INFO] ✅ @storybook/addon-docs
+[13:16:16.962] [INFO] Storybook was successfully installed in your project!
+[13:16:16.963] [INFO] To run Storybook, run ng run merchant-review-portal:storybook. CTRL+C to stop.
+[13:16:16.963] [INFO] Want to learn more about Storybook? https://storybook.js.org/
+Having trouble or want to chat? https://discord.gg/storybook/
+[13:16:17.071] [INFO] 

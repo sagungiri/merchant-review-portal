@@ -2,6 +2,7 @@
 
 const ACCESS_TTL_MS = 90_000;
 const REFRESH_TTL_MS = 1 * 24 * 60 * 60_000;
+const REFRESH_COOKIE = 'mrp_refresh';
 
 const refreshSessions = new Map();
 
@@ -74,9 +75,52 @@ function consumeRefreshToken(token) {
   };
 }
 
+function revokeRefreshToken(token) {
+  const payload = decode(token);
+  if (!payload?.jti) return;
+  const session = refreshSessions.get(payload.jti);
+  if (session) session.rotated = true;
+}
+
+function readCookie(req, name) {
+  const header = req.headers.cookie || '';
+  for (const part of header.split(';')) {
+    const [key, ...rest] = part.trim().split('=');
+    if (key === name) return decodeURIComponent(rest.join('='));
+  }
+  return '';
+}
+
+function refreshCookieHeader(value, maxAgeSec) {
+  return [
+    `${REFRESH_COOKIE}=${encodeURIComponent(value)}`,
+    'HttpOnly',
+    'Path=/api/auth',
+    'SameSite=Lax',
+    `Max-Age=${maxAgeSec}`,
+  ].join('; ');
+}
+
+function setRefreshCookie(res, refreshToken) {
+  res.setHeader('Set-Cookie', refreshCookieHeader(refreshToken, Math.floor(REFRESH_TTL_MS / 1000)));
+}
+
+function clearRefreshCookie(res) {
+  res.setHeader('Set-Cookie', refreshCookieHeader('', 0));
+}
+
+function readRefreshCookie(req) {
+  return readCookie(req, REFRESH_COOKIE);
+}
+
 module.exports = {
   ACCESS_TTL_MS,
+  REFRESH_COOKIE,
   issueTokens,
   verifyAccessToken,
   consumeRefreshToken,
+  revokeRefreshToken,
+  setRefreshCookie,
+  clearRefreshCookie,
+  readRefreshCookie,
 };

@@ -3,7 +3,7 @@
 In-memory Express stand-in so the Angular app talks to a real HTTP backend. Data lives in process memory and **resets on restart**. Not a production service.
 
 Default URL: **http://localhost:3000**  
-CORS is open for `GET`, `POST`, `PUT`, `PATCH`, `OPTIONS` with `Content-Type` and `Authorization`.
+CORS echoes the request `Origin`, allows credentials, and accepts `GET`, `POST`, `PUT`, `PATCH`, `OPTIONS` with `Content-Type` and `Authorization`.
 
 How to start it from the repo root: [README.md](../README.md).
 
@@ -25,19 +25,19 @@ All merchant and permission routes need:
 Authorization: Bearer <accessToken>
 ```
 
-Tokens are base64url JSON (not signed JWTs). Access tokens expire in **90 seconds** so concurrent 401s and refresh are easy to demo. Refresh tokens last **1 day** and **rotate** — using one invalidates it.
+Tokens are base64url JSON (not signed JWTs). Access tokens expire in **90 seconds** so concurrent 401s and refresh are easy to demo. The refresh token is an **HttpOnly** `mrp_refresh` cookie (`Path=/api/auth`, `SameSite=Lax`, 1 day). It **rotates** on every refresh — using one invalidates it. The SPA never reads it from JavaScript; send requests with credentials.
 
 | Method | Path | Body | Notes |
 | --- | --- | --- | --- |
-| `POST` | `/api/auth/login` | `{ email, password }` | Returns tokens + public user |
-| `POST` | `/api/auth/refresh` | `{ refreshToken }` | One-time; fails if already rotated/expired |
+| `POST` | `/api/auth/login` | `{ email, password }` | Sets refresh cookie; returns access token + user |
+| `POST` | `/api/auth/refresh` | — (cookie) | One-time; curl may send `{ refreshToken }` instead |
+| `POST` | `/api/auth/logout` | — | Revokes cookie and clears it |
 
 Login / refresh response:
 
 ```json
 {
   "accessToken": "...",
-  "refreshToken": "...",
   "expiresInMs": 90000,
   "user": { "id": "...", "email": "...", "name": "...", "role": "SALES" }
 }
@@ -183,7 +183,7 @@ Every failure uses:
 
 | HTTP | `code` | When |
 | --- | --- | --- |
-| 400 | `BAD_REQUEST` | Missing `refreshToken`, invalid `reviewerId`, invalid `decision` |
+| 400 | `BAD_REQUEST` | Missing refresh cookie, invalid `reviewerId`, invalid `decision` |
 | 401 | `INVALID_CREDENTIALS` | Bad login |
 | 401 | `UNAUTHORIZED` | Missing bearer token, or user gone |
 | 401 | `TOKEN_EXPIRED` | Access token invalid or past `exp` |

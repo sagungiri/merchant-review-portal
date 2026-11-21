@@ -25,14 +25,12 @@ One command starts the mock API and the Angular dev server:
 npm run start:all
 ```
 
-| Process | URL |
-| --- | --- |
+| Process               | URL                   |
+| --------------------- | --------------------- |
 | Angular (live reload) | http://localhost:4200 |
-| Mock API | http://localhost:3000 |
+| Mock API              | http://localhost:3000 |
 
 Open **http://localhost:4200** in the browser.
-
-
 
 ### Start them separately
 
@@ -49,10 +47,10 @@ Builds both images and starts both containers:
 docker compose up --build
 ```
 
-| Service | URL |
-| --- | --- |
+| Service                           | URL                   |
+| --------------------------------- | --------------------- |
 | Angular (production build, Nginx) | http://localhost:8080 |
-| Mock API | http://localhost:3000 |
+| Mock API                          | http://localhost:3000 |
 
 Open **http://localhost:8080**. The browser still calls the API at `http://localhost:3000`.
 
@@ -64,16 +62,15 @@ docker compose down
 
 ## Demo accounts
 
-| Email | Password | Role |
-| --- | --- | --- |
-| `sales@demo.local` | `Sales@2468` | SALES (Ram) |
+| Email                 | Password        | Role            |
+| --------------------- | --------------- | --------------- |
+| `sales@demo.local`    | `Sales@2468`    | SALES (Ram)     |
 | `reviewer@demo.local` | `Reviewer@2468` | REVIEWER (Hari) |
-| `admin@demo.local` | `Admin@2468` | ADMIN (Krishna) |
+| `admin@demo.local`    | `Admin@2468`    | ADMIN (Krishna) |
 
 ## Other commands
 
 ```bash
 npm test              # Vitest + TestBed
 npm run build         # production output in dist/
-npm run storybook     # http://localhost:6006
 ```
