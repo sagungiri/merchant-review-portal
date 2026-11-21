@@ -1,0 +1,27 @@
+:host {
+  display: inline-flex;
+}
+
+.badge {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font: var(--mat-sys-label-medium);
+  font-weight: var(--app-font-weight-medium);
+  background: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface-variant);
+
+  &[data-tone='info'] {
+    background: color-mix(in srgb, var(--mat-sys-primary) 14%, white);
+    color: var(--mat-sys-primary);
+  }
+
+  &[data-tone='success'] {
+    background: color-mix(in srgb, var(--app-toast-success) 28%, white);
+    color: #166534;
+  }
+
+  &[data-tone='danger'] {
+    background: color-mix(in srgb, var(--mat-sys-error) 14%, white);
+    color: var(--mat-sys-error);
+  }
+}

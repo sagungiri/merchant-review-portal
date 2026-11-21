@@ -48,7 +48,7 @@ export class Login {
         next: () => {
           this.toast.success('Signed in successfully');
           void this.router.navigateByUrl(
-            safeReturnUrl(this.route.snapshot.queryParamMap.get('returnUrl'), AppRoutes.merchants),
+            safeReturnUrl(this.route.snapshot.queryParamMap.get('returnUrl'), AppRoutes.dashboard),
           );
         },
         error: (err) => {

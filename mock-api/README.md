@@ -127,7 +127,7 @@ Create (`POST`) always sets `status: DRAFT` and `createdBy` to the logged-in use
 
 `merchantName`, `taxId`, `bankAccountLast4`, `contactEmail`, `contactPhone`, `businessAddress`, `expectedMonthlyVolume`, `draftStep`
 
-Patch (`PATCH`) applies the same fields. It **ignores** `id`, `createdBy`, `createdAt`, and `riskHistory`. Status may only change `DRAFT` → `SUBMITTED`; every other workflow change goes through assign/review.
+Patch (`PATCH`) applies the same fields. It **ignores** `id`, `createdBy`, `createdAt`, and `riskHistory`. The only status a client may send is `DRAFT` → `SUBMITTED`. When a user has `defaultAssignee: true` (Hari, for this demo), that submit assigns the merchant to them, sets `IN_REVIEW`, and appends an `ASSIGNED` risk event. The flag is not returned on the login user. A users list for picking someone else is not part of this API yet.
 
 A decided merchant (`APPROVED` / `REJECTED`) cannot be patched.
 
@@ -166,10 +166,10 @@ DRAFT → SUBMITTED → IN_REVIEW → APPROVED
                               ↘ REJECTED
 ```
 
-1. Sales creates a draft (`POST`).
-2. Sales submits with `PATCH` `{ "status": "SUBMITTED" }`.
-3. Admin assigns a reviewer (`POST .../assign`). If status was `SUBMITTED`, it becomes `IN_REVIEW`.
-4. Assigned reviewer (or admin) decides (`POST .../review`). After that the merchant is locked.
+1. Sales creates a draft (`POST`). It has no assignee.
+2. Sales submits with `PATCH` `{ "status": "SUBMITTED" }`. The default assignee (Hari) is set and the status becomes `IN_REVIEW`.
+3. `POST .../assign` remains for a later users list. If status was `SUBMITTED`, assign sets `IN_REVIEW`.
+4. The assigned reviewer (or an admin) decides (`POST .../review`). After that the merchant is locked.
 
 ---
 

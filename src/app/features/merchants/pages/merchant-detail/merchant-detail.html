@@ -1,0 +1,70 @@
+@if (loading()) {
+  <app-loading-spinner label="Loading" />
+} @else if (error(); as message) {
+  <div class="error" role="alert">
+    <p>{{ message }}</p>
+    <app-button variant="secondary" (click)="load()">Retry</app-button>
+  </div>
+} @else if (merchant(); as record) {
+  <app-form-container [title]="record.merchantName">
+    <app-status-badge formSubtitle [status]="statusOf(record.status)" />
+    <dl>
+      <dt>Address</dt>
+      <dd>{{ record.businessAddress || '—' }}</dd>
+      <dt>Monthly volume</dt>
+      <dd>{{ record.expectedMonthlyVolume | number }}</dd>
+      <dt>Email</dt>
+      <dd>{{ record.contactEmail || '—' }}</dd>
+      <dt>Phone</dt>
+      <dd>{{ record.contactPhone || '—' }}</dd>
+      <dt>Tax id</dt>
+      <dd>{{ secret(record.taxId) }}</dd>
+      <dt>Account</dt>
+      <dd class="secret">
+        <span>{{ secret(record.bankAccountLast4) }}</span>
+        <ng-container [appHasPermission]="permissions.SENSITIVE_REVEAL" #reveal="hasPermission">
+          @if (reveal.allowed()) {
+            <app-button variant="text" (click)="toggleSecret()">
+              {{ revealed() ? 'Hide' : 'Show' }}
+            </app-button>
+          }
+        </ng-container>
+      </dd>
+      <dt>Updated</dt>
+      <dd>{{ record.updatedAt | date: 'medium' }}</dd>
+    </dl>
+
+    <h3>Risk history</h3>
+    @if (record.riskHistory.length === 0) {
+      <p class="muted">No history yet.</p>
+    } @else {
+      <ul class="history">
+        @for (event of record.riskHistory; track event.id) {
+          <li>
+            <strong>{{ historyLabel(event.action) }}</strong>
+            <span>{{ event.at | date: 'medium' }}</span>
+            @if (event.note) {
+              <p>{{ event.note }}</p>
+            }
+          </li>
+        }
+      </ul>
+    }
+
+    <div formActions>
+      <ng-container [appHasPermission]="permissions.MERCHANT_EDIT" #editPermission="hasPermission">
+        @if (editPermission.allowed() && canEdit()) {
+          <app-button variant="secondary" (click)="edit()">Edit</app-button>
+        }
+      </ng-container>
+      <ng-container [appHasPermission]="permissions.MERCHANT_REVIEW" #reviewPermission="hasPermission">
+        @if (reviewPermission.allowed() && canReview()) {
+          <app-button variant="danger" [loading]="reviewing() === 'REJECTED'" (click)="reject()">
+            Reject
+          </app-button>
+          <app-button [loading]="reviewing() === 'APPROVED'" (click)="approve()">Approve</app-button>
+        }
+      </ng-container>
+    </div>
+  </app-form-container>
+}

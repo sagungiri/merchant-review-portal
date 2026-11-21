@@ -1,20 +1,9 @@
-<mat-toolbar>
-  <a class="brand" [routerLink]="routes.merchants">Merchant Review</a>
+<app-side-menu />
 
-  <nav class="nav">
-    <a mat-button [routerLink]="routes.merchants" routerLinkActive="active">Merchants</a>
-    <ng-container [appHasPermission]="permissions.MERCHANT_CREATE" #create="hasPermission">
-      @if (create.allowed()) {
-        <a mat-button [routerLink]="routes.merchantNew" routerLinkActive="active">New merchant</a>
-      }
-    </ng-container>
-  </nav>
-
-  <span class="spacer"></span>
-
+<header>
   <span class="user">{{ auth.currentUser()?.name }}</span>
-  <button mat-button type="button" (click)="auth.logout()">Log out</button>
-</mat-toolbar>
+  <app-button variant="text" (click)="auth.logout()">Log out</app-button>
+</header>
 
 <main class="content">
   <router-outlet />

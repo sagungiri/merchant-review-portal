@@ -1,0 +1,16 @@
+<a class="brand" [routerLink]="routes.dashboard">Merchant Review</a>
+
+<nav>
+  <a
+    [routerLink]="routes.dashboard"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    Dashboard
+  </a>
+  <ng-container [appHasPermission]="permissions.MERCHANT_VIEW" #merchants="hasPermission">
+    @if (merchants.allowed()) {
+      <a [routerLink]="routes.merchants" routerLinkActive="active">Merchants</a>
+    }
+  </ng-container>
+</nav>

@@ -1,0 +1,89 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <app-form-container [title]="title()">
+    <app-status-badge formSubtitle [status]="badge()" />
+    <app-stepper linear [(index)]="stepIndex">
+      <app-step label="Business" [stepControl]="form.controls.business">
+        <div class="fields" [formGroup]="form.controls.business">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Merchant name</mat-label>
+            <input matInput formControlName="merchantName" />
+            @if (form.controls.business.controls.merchantName.hasError('required')) {
+              <mat-error>Name is required</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Business address</mat-label>
+            <input matInput formControlName="businessAddress" />
+            @if (form.controls.business.controls.businessAddress.hasError('required')) {
+              <mat-error>Address is required</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Expected monthly volume</mat-label>
+            <input matInput type="number" formControlName="expectedMonthlyVolume" />
+            @if (form.controls.business.controls.expectedMonthlyVolume.hasError('min')) {
+              <mat-error>Volume cannot be negative</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </app-step>
+
+      <app-step label="Contact" [stepControl]="form.controls.contact">
+        <div class="fields" [formGroup]="form.controls.contact">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Contact email</mat-label>
+            <input matInput type="email" formControlName="contactEmail" />
+            @if (form.controls.contact.controls.contactEmail.hasError('required')) {
+              <mat-error>Email is required</mat-error>
+            } @else if (form.controls.contact.controls.contactEmail.hasError('email')) {
+              <mat-error>Enter a valid email</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Contact phone</mat-label>
+            <input matInput formControlName="contactPhone" />
+            @if (form.controls.contact.controls.contactPhone.hasError('required')) {
+              <mat-error>Phone is required</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </app-step>
+
+      <app-step label="Financial" [stepControl]="form.controls.financial">
+        <div class="fields" [formGroup]="form.controls.financial">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Tax id</mat-label>
+            <input matInput formControlName="taxId" />
+            @if (form.controls.financial.controls.taxId.hasError('required')) {
+              <mat-error>Tax id is required</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Bank account last 4</mat-label>
+            <input matInput formControlName="bankAccountLast4" maxlength="4" />
+            @if (form.controls.financial.controls.bankAccountLast4.hasError('required')) {
+              <mat-error>Last 4 digits are required</mat-error>
+            } @else if (form.controls.financial.controls.bankAccountLast4.hasError('last4')) {
+              <mat-error>Enter 4 digits</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </app-step>
+    </app-stepper>
+
+    <div formActions>
+      @if (stepIndex() > 0) {
+        <app-button variant="text" (click)="back()">Back</app-button>
+      }
+      @if (stepIndex() < 2) {
+        <app-button (click)="next()">Next</app-button>
+      } @else if (status() === 'DRAFT') {
+        <app-button type="submit" [loading]="submitting()">Submit</app-button>
+      }
+    </div>
+  </app-form-container>
+</form>

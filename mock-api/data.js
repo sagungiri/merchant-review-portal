@@ -1,6 +1,6 @@
 const users = [
   { id: '7c9e6679-7425-40de-944b-e07fc1f90ae7', email: 'sales@demo.local', password: 'Sales@2468', name: 'Ram', role: 'SALES' },
-  { id: '3fa85f64-5717-4562-b3fc-2c963f66afa6', email: 'reviewer@demo.local', password: 'Reviewer@2468', name: 'Hari', role: 'REVIEWER' },
+  { id: '3fa85f64-5717-4562-b3fc-2c963f66afa6', email: 'reviewer@demo.local', password: 'Reviewer@2468', name: 'Hari', role: 'REVIEWER', defaultAssignee: true },
   { id: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d', email: 'admin@demo.local', password: 'Admin@2468', name: 'Krishna', role: 'ADMIN' },
 ];
 

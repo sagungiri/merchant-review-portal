@@ -7,6 +7,7 @@ const {
   canEdit,
   canView,
   createMerchant,
+  findDefaultAssignee,
   findMerchantById,
   findUserById,
   isDecided,
@@ -74,14 +75,28 @@ merchantsRouter.patch('/:id', requirePermission('MERCHANT_EDIT'), (req, res) => 
   }
 
   const changes = { ...(req.body || {}) };
+  let assignee = null;
   if (changes.status && changes.status !== merchant.status) {
     const submitting = merchant.status === 'DRAFT' && changes.status === 'SUBMITTED';
     if (!submitting) {
       return sendError(res, 409, 'CONFLICT', 'Use assign/review to change workflow status');
     }
+    assignee = findDefaultAssignee();
+    if (assignee) {
+      changes.assignedReviewerId = assignee.id;
+      changes.status = 'IN_REVIEW';
+    }
   }
 
-  res.json(applyChanges(merchant, changes));
+  const updated = applyChanges(merchant, changes);
+  if (assignee) {
+    addRiskEvent(updated, {
+      actorId: req.user.id,
+      action: 'ASSIGNED',
+      note: `Assigned to ${assignee.name}`,
+    });
+  }
+  res.json(updated);
 });
 
 merchantsRouter.post('/:id/assign', requirePermission('MERCHANT_ASSIGN'), (req, res) => {

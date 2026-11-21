@@ -12,6 +12,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
           @if (subtitle()) {
             <p>{{ subtitle() }}</p>
           }
+          <ng-content select="[formSubtitle]" />
         </header>
       }
 

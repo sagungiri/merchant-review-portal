@@ -14,8 +14,12 @@ header h2 {
   font: var(--mat-sys-title-large);
 }
 
-header p {
+header p,
+header app-status-badge {
   margin: 0.35rem 0 0;
+}
+
+header p {
   color: var(--mat-sys-on-surface-variant);
 }
 

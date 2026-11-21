@@ -67,10 +67,3 @@ docker compose down
 | `sales@demo.local`    | `Sales@2468`    | SALES (Ram)     |
 | `reviewer@demo.local` | `Reviewer@2468` | REVIEWER (Hari) |
 | `admin@demo.local`    | `Admin@2468`    | ADMIN (Krishna) |
-
-## Other commands
-
-```bash
-npm test              # Vitest + TestBed
-npm run build         # production output in dist/
-```

@@ -1,0 +1,55 @@
+<header class="heading">
+  <h1>Merchants</h1>
+  <ng-container [appHasPermission]="permissions.MERCHANT_CREATE" #create="hasPermission">
+    @if (create.allowed()) {
+      <app-button (click)="createMerchant()">New merchant</app-button>
+    }
+  </ng-container>
+</header>
+
+<div class="filters">
+  <mat-form-field appearance="outline">
+    <mat-label>Search by name</mat-label>
+    <input matInput [formControl]="searchControl" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Status</mat-label>
+    <mat-select [formControl]="statusControl">
+      <mat-option value="">All</mat-option>
+      @for (status of statuses; track status.value) {
+        <mat-option [value]="status.value">{{ status.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+@if (error(); as message) {
+  <div class="error" role="alert">
+    <p>{{ message }}</p>
+    <app-button variant="secondary" (click)="load()">Retry</app-button>
+  </div>
+} @else {
+  <app-data-table [rows]="items()" [loading]="loading()" emptyMessage="No merchants">
+    <app-column key="merchantName" header="Merchant">
+      <ng-template let-row>
+        <a [routerLink]="detailUrl(row.id)">{{ row.merchantName }}</a>
+      </ng-template>
+    </app-column>
+    <app-column key="status" header="Status">
+      <ng-template let-row>
+        <app-status-badge [status]="statusOf(row.status)" />
+      </ng-template>
+    </app-column>
+    <app-column key="updatedAt" header="Updated">
+      <ng-template let-row>{{ row.updatedAt | date: 'mediumDate' }}</ng-template>
+    </app-column>
+  </app-data-table>
+
+  <app-pagination
+    [page]="page()"
+    [pageSize]="pageSize()"
+    [total]="total()"
+    (pageChange)="onPage($event)"
+  />
+}

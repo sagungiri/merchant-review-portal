@@ -1,0 +1,7 @@
+<mat-horizontal-stepper [linear]="linear()" (selectedIndexChange)="index.set($event)">
+  @for (step of steps(); track step) {
+    <mat-step [label]="step.label()" [stepControl]="control(step)">
+      <ng-container [ngTemplateOutlet]="step.content()" />
+    </mat-step>
+  }
+</mat-horizontal-stepper>

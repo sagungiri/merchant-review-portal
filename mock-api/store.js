@@ -45,6 +45,10 @@ function findUserByEmail(email) {
   return usersByEmail.get(String(email || '').trim().toLowerCase()) ?? null;
 }
 
+function findDefaultAssignee() {
+  return users.find((user) => user.defaultAssignee) ?? null;
+}
+
 function findMerchantById(id) {
   return merchantsById.get(id) ?? null;
 }
@@ -120,6 +124,7 @@ module.exports = {
   toListItem,
   findUserById,
   findUserByEmail,
+  findDefaultAssignee,
   findMerchantById,
   listMerchants,
   isDecided,

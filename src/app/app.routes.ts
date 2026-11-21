@@ -20,7 +20,11 @@ export const routes: Routes = [
     component: Shell,
     canActivate: [authGuard, loadPermissionsGuard],
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'merchants' },
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./features/dashboard/dashboard').then((m) => m.Dashboard),
+      },
       {
         path: 'merchants',
         loadChildren: () =>

@@ -1,0 +1,17 @@
+.app-stepper {
+  display: block;
+  --mat-stepper-header-height: 3rem;
+
+  .mat-stepper-horizontal {
+    background: transparent;
+  }
+
+  .mat-horizontal-stepper-header {
+    padding: 0 var(--app-space-2);
+  }
+
+  .mat-horizontal-content-container {
+    overflow: visible;
+    padding: var(--app-space-4) 0 0;
+  }
+}

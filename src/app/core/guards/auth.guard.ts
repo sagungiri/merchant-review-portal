@@ -21,7 +21,7 @@ export const loginGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (auth.isAuthenticated()) {
-    return router.createUrlTree([AppRoutes.merchants]);
+    return router.createUrlTree([AppRoutes.dashboard]);
   }
 
   return true;

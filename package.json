@@ -7,7 +7,6 @@
     "start:all": "npm run mock-api & npm start",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "mock-api": "node mock-api/server.js"
   },
   "private": true,
