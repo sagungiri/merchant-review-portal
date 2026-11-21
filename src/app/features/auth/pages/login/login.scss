@@ -3,26 +3,16 @@
   min-height: 100%;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: var(--app-space-6);
 }
 
-.card {
+form {
   width: 100%;
   max-width: 24rem;
 }
 
-form {
+.fields {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  margin-top: 1rem;
-}
-
-.error {
-  color: var(--mat-sys-error);
-  margin: 0 0 0.75rem;
-}
-
-button {
-  align-self: flex-start;
+  gap: var(--app-space-1);
 }

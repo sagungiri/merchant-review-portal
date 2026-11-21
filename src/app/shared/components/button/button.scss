@@ -1,0 +1,49 @@
+.app-button {
+  display: inline-block;
+  vertical-align: middle;
+
+  &.block {
+    display: block;
+  }
+
+  button {
+    --mat-progress-spinner-active-indicator-color: currentColor;
+  }
+
+  &.block button {
+    width: 100%;
+  }
+
+  &:has(button.loading) {
+    cursor: progress;
+  }
+
+  .mdc-button__label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--app-space-2);
+  }
+
+  button.danger {
+    --mat-button-filled-container-color: var(--mat-sys-error);
+    --mat-button-filled-label-text-color: var(--mat-sys-on-error);
+    --mat-button-filled-state-layer-color: var(--mat-sys-on-error);
+  }
+
+  button.loading[disabled].mat-mdc-unelevated-button {
+    background-color: var(--mat-button-filled-container-color, var(--mat-sys-primary));
+    color: var(--mat-button-filled-label-text-color, var(--mat-sys-on-primary));
+  }
+
+  button.loading[disabled].mat-mdc-outlined-button {
+    color: var(--mat-button-outlined-label-text-color, var(--mat-sys-primary));
+    border-color: var(--mat-button-outlined-outline-color, var(--mat-sys-outline));
+    background: transparent;
+  }
+
+  button.loading[disabled].mat-mdc-button:not(.mat-mdc-unelevated-button):not(
+      .mat-mdc-outlined-button
+    ) {
+    color: var(--mat-button-text-label-text-color, var(--mat-sys-primary));
+  }
+}

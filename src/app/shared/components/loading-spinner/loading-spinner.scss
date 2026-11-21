@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--app-space-6);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+:host(.overlay) {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: color-mix(in srgb, var(--mat-sys-surface) 72%, transparent);
+}
+
+div {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-3);
+}
+
+span {
+  font: var(--mat-sys-body-medium);
+}

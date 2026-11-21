@@ -1,0 +1,8 @@
+.mat-mdc-card {
+  border: 1px solid var(--mat-sys-outline-variant);
+}
+
+.app-toast-pane.mat-mdc-snack-bar-container {
+  --mat-snack-bar-container-color: var(--mat-sys-on-surface);
+  --mat-snack-bar-supporting-text-color: var(--mat-sys-surface);
+}

@@ -1,0 +1,51 @@
+@use '@angular/material' as mat;
+@use '../tokens' as tokens;
+@use '../abstracts' as abstracts;
+
+@mixin apply() {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: (
+        plain-family: abstracts.$font-family,
+        brand-family: abstracts.$font-family,
+        bold-weight: tokens.$font-weight-bold,
+        medium-weight: tokens.$font-weight-medium,
+        regular-weight: tokens.$font-weight-regular,
+      ),
+      density: 0,
+    ),
+    abstracts.$theme-colors
+  );
+
+  --mat-button-filled-container-shape: 8px;
+  --mat-button-outlined-container-shape: 8px;
+  --mat-button-protected-container-shape: 8px;
+  --mat-button-text-container-shape: 8px;
+  --mat-button-tonal-container-shape: 8px;
+  --mat-form-field-outlined-container-shape: 8px;
+  --mat-dialog-container-shape: 16px;
+  --mat-snack-bar-container-shape: 8px;
+  --mat-card-elevated-container-elevation: none;
+
+  --app-font-weight-regular: #{tokens.$font-weight-regular};
+  --app-font-weight-medium: #{tokens.$font-weight-medium};
+  --app-font-weight-bold: #{tokens.$font-weight-bold};
+
+  --app-space-1: #{tokens.$space-1};
+  --app-space-2: #{tokens.$space-2};
+  --app-space-3: #{tokens.$space-3};
+  --app-space-4: #{tokens.$space-4};
+  --app-space-5: #{tokens.$space-5};
+  --app-space-6: #{tokens.$space-6};
+  --app-space-10: #{tokens.$space-10};
+
+  --app-toast-success: #{abstracts.$toast-success};
+  --app-toast-error: #{abstracts.$toast-error};
+  --app-toast-warning: #{abstracts.$toast-warning};
+  --app-toast-info: #{abstracts.$toast-info};
+}

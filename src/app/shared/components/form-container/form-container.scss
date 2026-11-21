@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.panel {
+  background: var(--mat-sys-surface);
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--mat-sys-corner-medium);
+  padding: var(--app-space-6);
+}
+
+header h2 {
+  margin: 0;
+  font: var(--mat-sys-title-large);
+}
+
+header p {
+  margin: 0.35rem 0 0;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.body {
+  margin-top: var(--app-space-4);
+}
+
+.panel > .body:first-child {
+  margin-top: 0;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--app-space-2);
+  margin-top: var(--app-space-5);
+}
+
+footer:not(:has(*)) {
+  display: none;
+}

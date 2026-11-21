@@ -1,0 +1,41 @@
+.card {
+  position: relative;
+  background: var(--mat-sys-surface);
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--mat-sys-corner-medium);
+  overflow: hidden;
+}
+
+.frame {
+  max-height: calc(100dvh - 8rem);
+  overflow: auto;
+}
+
+.dimmed {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+table {
+  width: 100%;
+  background: transparent;
+}
+
+th.mat-mdc-header-cell {
+  z-index: 2;
+  color: var(--mat-sys-on-surface-variant);
+  font-weight: var(--app-font-weight-medium);
+  background-color: var(--mat-sys-surface-container-low);
+  white-space: nowrap;
+}
+
+tr:hover td {
+  background: var(--mat-sys-surface-container-low);
+}
+
+.empty {
+  margin: 0;
+  padding: var(--app-space-10) var(--app-space-6);
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+}
